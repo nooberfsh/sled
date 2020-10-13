@@ -6,9 +6,10 @@ use std::{
     sync::atomic::Ordering::{Acquire, Release},
 };
 
-use crossbeam_epoch::{unprotected, Atomic, Guard, Owned, Shared};
-
-use crate::debug_delay;
+use crate::{
+    crossbeam_epoch::{unprotected, Atomic, Guard, Owned, Shared},
+    debug_delay,
+};
 
 /// A node in the lock-free `Stack`.
 #[derive(Debug)]
@@ -64,7 +65,7 @@ where
         &self,
         formatter: &mut fmt::Formatter<'_>,
     ) -> Result<(), fmt::Error> {
-        let guard = crossbeam_epoch::pin();
+        let guard = crate::crossbeam_epoch::pin();
         let head = self.head(&guard);
         let iter = Iter::from_ptr(head, &guard);
 

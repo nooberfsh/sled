@@ -185,6 +185,7 @@ mod binary_search;
 mod concurrency_control;
 mod config;
 mod context;
+mod crossbeam_epoch;
 mod db;
 mod dll;
 mod fastcmp;
@@ -286,23 +287,21 @@ const DEFAULT_TREE_ID: &[u8] = b"__sled__default";
 
 /// hidden re-export of items for testing purposes
 #[doc(hidden)]
-pub use {
-    self::{
-        config::RunningConfig,
-        lazy::Lazy,
-        pagecache::{
-            constants::{
-                MAX_MSG_HEADER_LEN, MAX_SPACE_AMPLIFICATION,
-                MINIMUM_ITEMS_PER_SEGMENT, SEG_HEADER_LEN,
-            },
-            BatchManifest, DiskPtr, Log, LogKind, LogOffset, LogRead, Lsn,
-            PageCache, PageId,
-        },
-        serialization::Serialize,
-    },
+pub use self::{
+    config::RunningConfig,
     crossbeam_epoch::{
         pin as crossbeam_pin, Atomic, Guard as CrossbeamGuard, Owned, Shared,
     },
+    lazy::Lazy,
+    pagecache::{
+        constants::{
+            MAX_MSG_HEADER_LEN, MAX_SPACE_AMPLIFICATION,
+            MINIMUM_ITEMS_PER_SEGMENT, SEG_HEADER_LEN,
+        },
+        BatchManifest, DiskPtr, Log, LogKind, LogOffset, LogRead, Lsn,
+        PageCache, PageId,
+    },
+    serialization::Serialize,
 };
 
 pub use self::{

@@ -8,9 +8,8 @@ use std::{
     sync::atomic::Ordering::{Acquire, Relaxed, Release},
 };
 
-use crossbeam_epoch::{pin, Atomic, Guard, Owned, Shared};
-
 use crate::{
+    crossbeam_epoch::{pin, Atomic, Guard, Owned, Shared},
     debug_delay,
     pagecache::{constants::MAX_PID_BITS, Page, PageView},
     Measure, M,
